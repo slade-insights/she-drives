@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Page not found | She Drives"
+  description="That page does not exist. Reserve a chauffeur or call She Drives directly."
+  path="/404/"
+>
+  <section class="section">
+    <div class="wrap measure">
+      <h1>That page is not here</h1>
+      <p class="lead">
+        The link may be old. You can reserve a chauffeur, or call us and we will
+        sort it out faster than the website will.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/book/">Reserve your chauffeur</a>
+        <a class="btn btn--ghost" href={site.phoneHref}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

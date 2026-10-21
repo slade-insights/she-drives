@@ -1,0 +1,232 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/Faq.astro";
+import heroPortrait from "../assets/sherri-drum.webp";
+import { site, overflowClause, testimonials } from "../data/site";
+
+const title = "Women-Led Chauffeur Service | Orange County & LA";
+const description =
+  "Book a woman chauffeur by name, in advance. She Drives is a women-led chauffeur service in Seal Beach serving Orange County, Long Beach and LA. California TCP 46691-A.";
+
+const services = [
+  {
+    href: "/lax-car-service/",
+    name: "Airport transfers",
+    copy: "We track your flight. If you land early we are already there, and if you land late we are still there.",
+  },
+  {
+    href: "/book/",
+    name: "Executive travel",
+    copy: "The same chauffeur, every trip. Standing accounts for assistants booking on someone else's behalf.",
+  },
+  {
+    href: "/book/",
+    name: "Events and weddings",
+    copy: "Timed around the schedule you send us, down to the photographer's window and the last shuttle home.",
+  },
+  {
+    href: "/book/",
+    name: "Private tours",
+    copy: "Coastal drives, wine country, a day of shopping. Built around your pace rather than a route sheet.",
+  },
+];
+
+const faq = [
+  {
+    q: "Can I request a woman chauffeur?",
+    a: "Yes, and with She Drives you do not have to request it. Every She Drives chauffeur is a woman, and you know who is picking you up before the day arrives.",
+  },
+  {
+    q: "Do you charge extra for a woman chauffeur?",
+    a: "No. Safety is not an upgrade, and we do not price it as one. You pay the same rate you would pay anyone else.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: `We are based in ${site.address.locality} and drive throughout Orange County, Long Beach and Los Angeles County, with longer trips to Temecula, Santa Barbara, Palm Springs and San Diego.`,
+  },
+  {
+    q: "How far ahead should I book?",
+    a: "As early as you can. We are a small operation by design, which is what makes the service personal, and it also means popular dates go first.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/">
+  <!-- Band 1: Discovery. The H1 echoes the title claim word for word. -->
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">Seal Beach, California</p>
+        <h1>Women-Led Chauffeur Service in Orange County</h1>
+        <p class="lead">
+          You book a woman chauffeur by name, in advance. Not a preference you
+          hope an app honors, and not a stranger you meet at the curb.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/book/">Reserve your chauffeur</a>
+          <a class="btn btn--ghost" href={site.phoneHref}>
+            Call {site.phone}
+          </a>
+        </div>
+        <p class="hero__meta">
+          Licensed {site.tcpLong} &middot; Call or text, 7 days
+        </p>
+      </div>
+      <div class="frame hero__image">
+        <Image
+          src={heroPortrait}
+          alt="Sherri Drum, founder of She Drives"
+          widths={[480, 760, 1040]}
+          sizes="(min-width: 52rem) 42vw, 92vw"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Band 4 runs early here: proof before the reader has to ask for it. -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <ul class="proof">
+        <li><strong>{site.tcp}</strong>California licensed and insured</li>
+        <li><strong>Women-led</strong>Owner-operated from Seal Beach</li>
+        <li><strong>One vehicle</strong>Luxury SUV, up to 6 guests</li>
+        <li><strong>LAX &middot; LGB &middot; SNA</strong>Flight-tracked transfers</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- The differentiation, stated plainly and early. -->
+  <section class="section">
+    <div class="wrap">
+      <div class="measure">
+        <p class="eyebrow">Why women book She Drives</p>
+        <h2>You know who is driving before the day arrives</h2>
+        <p>
+          Most women have had the ride where they text a friend the license
+          plate and keep the phone in their hand the whole way. The apps have
+          started offering a woman driver as a preference, which raises the odds
+          of a match. It does not promise one.
+        </p>
+        <p>
+          She Drives is the booked version of that. Sherri drives most trips
+          herself, you know her name before she arrives, and the standard does
+          not change because it is late or because the route is unfamiliar.
+        </p>
+      </div>
+
+      <div class="pledge measure">
+        <p>{overflowClause}</p>
+      </div>
+
+      <p class="measure">
+        <a href="/women-led-chauffeur-service/">
+          More on how we work and who we drive
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Services. One concrete fact each, no adjectives doing the work. -->
+  <section class="section">
+    <div class="wrap">
+      <h2>What we drive you to</h2>
+      <div class="grid grid--4">
+        {
+          services.map((s) => (
+            <article class="card">
+              <h3>
+                <a href={s.href}>{s.name}</a>
+              </h3>
+              <p>{s.copy}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Band 4 proper: testimonials, verbatim and attributed as cleared. -->
+  <section class="section section--sea">
+    <div class="wrap">
+      <h2>What clients say</h2>
+      <div class="grid grid--3">
+        {
+          testimonials.map((t) => (
+            <figure class="quote">
+              <p>&ldquo;{t.quote}&rdquo;</p>
+              <footer>{t.attribution}</footer>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Band 3: Localization. Real places, not a county name. -->
+  <section class="section">
+    <div class="wrap">
+      <div class="measure">
+        <p class="eyebrow">Where we drive</p>
+        <h2>Based in Seal Beach, which turns out to be the useful part</h2>
+        <p>
+          Seal Beach sits on the line between Orange County and Los Angeles
+          County. Long Beach Airport is about seven miles away, John Wayne and
+          LAX are both inside half an hour in normal traffic, and the Long Beach
+          and San Pedro cruise terminals are closer still.
+        </p>
+        <p>
+          Regular runs from Seal Beach, Los Alamitos, Rossmoor, Long Beach,
+          Huntington Beach, Newport Beach and Irvine, with longer trips to
+          Temecula wine country, Santa Barbara, Palm Springs and San Diego.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} />
+
+  <!-- Band 5: Commitment. One primary action. -->
+  <section class="section section--sea">
+    <div class="wrap measure">
+      <h2>Reserve your chauffeur</h2>
+      <p class="lead">
+        Tell us the date, the pickup and where you are headed. We confirm
+        availability and come back with a quote.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/book/">Start a reservation</a>
+        <a class="btn btn--ghost" href={site.phoneHref}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--s5) var(--s4);
+  }
+  .hero__inner {
+    display: grid;
+    gap: var(--s4);
+    align-items: center;
+  }
+  @media (min-width: 52rem) {
+    .hero__inner {
+      grid-template-columns: 1.05fr 1fr;
+      gap: var(--s5);
+    }
+  }
+  .hero__copy h1 {
+    margin-bottom: var(--s3);
+  }
+  .hero__meta {
+    margin-top: var(--s3);
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+  .hero__image {
+    aspect-ratio: 4 / 5;
+  }
+</style>

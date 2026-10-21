@@ -1,0 +1,50 @@
+---
+/**
+ * Renders an FAQ list AND its FAQPage schema from the same array, so the
+ * markup and the structured data can never disagree. This is the whole
+ * reason FAQ lives in a component rather than being hand-written per page.
+ */
+interface Item {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  heading?: string;
+  items: Item[];
+}
+
+const { heading = "Questions people ask", items } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+---
+
+<section class="section section--tight">
+  <div class="wrap">
+    <h2>{heading}</h2>
+    <div class="faq">
+      {
+        items.map((item) => (
+          <div class="faq__item">
+            <h3>{item.q}</h3>
+            <p class="measure">{item.a}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(schema)}
+/>

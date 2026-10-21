@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BookingForm from "../components/BookingForm.astro";
+import { site, overflowClause } from "../data/site";
+
+const title = "Reserve Your Chauffeur | She Drives";
+const description =
+  "Reserve a woman chauffeur in Seal Beach, Orange County and Los Angeles. Send the date and pickup, and we confirm availability and a quote.";
+const crumbs = [{ href: "/book/", label: "Reserve" }];
+---
+
+<BaseLayout title={title} description={description} path="/book/" crumbs={crumbs}>
+  <section class="section">
+    <div class="wrap book">
+      <div>
+        <p class="eyebrow">Reservations</p>
+        <h1>Reserve Your Chauffeur</h1>
+        <p class="lead">
+          Tell us the date, the pickup and where you are headed. We confirm
+          whether we can cover it ourselves and come back with a quote.
+        </p>
+        <h2 class="flush">What happens next</h2>
+        <ol class="steps">
+          <li>You send the details below, or call or text if that is easier.</li>
+          <li>We check availability against the date you need.</li>
+          <li>
+            You get a reply naming your chauffeur and a quote for the trip.
+            Nothing is booked until you say yes.
+          </li>
+        </ol>
+        <div class="pledge">
+          <p>{overflowClause}</p>
+        </div>
+        <p class="small">
+          Licensed {site.tcpLong}. Call or text
+          <a href={site.phoneHref}>{site.phone}</a>, or email
+          <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+      </div>
+      <div>
+        <h2 id="booking-heading" class="flush">Reservation details</h2>
+        <BookingForm source="/book/" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .book { display: grid; gap: var(--s5); align-items: start; }
+  @media (min-width: 56rem) { .book { grid-template-columns: 1fr 1fr; } }
+  .flush { margin-top: var(--s4); }
+  .steps { padding-left: 1.2rem; max-width: var(--measure); }
+  .steps li { margin-bottom: var(--s1); }
+  .small { font-size: 0.9375rem; color: var(--ink-soft); }
+</style>

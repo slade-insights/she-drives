@@ -1,0 +1,421 @@
+/*
+ * She Drives design system.
+ *
+ * Direction: calm and credible, not opulent. Coastal Southern California
+ * rather than black-limousine-and-gold. The photography carries the
+ * personality; the type stays restrained and the palette stays narrow.
+ *
+ * COLOR TOKENS ARE PROVISIONAL. They are built to sit comfortably with a
+ * logo we have not yet seen. Once the real logo file is in hand, change
+ * only the five values in the first block below and the whole site follows.
+ */
+
+:root {
+  /* --- Brand palette, taken from the She Drives logo ---
+     The brush stroke samples at #fadedf across its whole width. The script
+     and the DRIVES wordmark are true black on white, so the site is black,
+     white and that one pink. Nothing else is introduced. --- */
+  --ink: #111111;          /* the logo's black, all body text */
+  --ink-soft: #5e5a5b;     /* secondary text, warm gray to sit with the pink */
+  --bone: #fdf9f9;         /* near-white page ground, a hint of the pink */
+  --sand: #f0e2e2;         /* rules, card edges, quiet fills */
+  --blush: #fadedf;        /* the logo pink, used as a field not as ink */
+  --blush-deep: #f2c5c7;   /* hover and edges on blush surfaces */
+  --accent: #111111;       /* CTAs are black on blush, as the logo is */
+  --sea: #2b2526;          /* near-black band for depth, warmed toward the pink */
+
+  /* --- Derived --- */
+  --surface: #ffffff;
+  --focus: #b8787c;        /* a darkened blush, dark enough to see on white */
+
+  /* --- Type --- */
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-body: "Inter Variable", system-ui, -apple-system, sans-serif;
+
+  /* --- Space scale --- */
+  --s1: 0.5rem;
+  --s2: 1rem;
+  --s3: 1.5rem;
+  --s4: 2.5rem;
+  --s5: 4rem;
+  --s6: 6rem;
+
+  --measure: 34rem;
+  --wide: 72rem;
+  --radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem; /* 17px, above the 16px floor */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Headings: Fraunces, optical sizing on, weight restrained --- */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 450;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--s2);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 1.35rem + 1.7vw, 2.5rem);
+  margin-top: var(--s5);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  margin-top: var(--s4);
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+p {
+  margin: 0 0 var(--s2);
+}
+
+a {
+  color: var(--ink);
+  text-decoration-color: var(--blush-deep);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Layout --- */
+.wrap {
+  width: 100%;
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding-inline: var(--s3);
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.section {
+  padding-block: var(--s5);
+}
+
+.section--tight {
+  padding-block: var(--s4);
+}
+
+.section--sea {
+  background: var(--sea);
+  color: var(--bone);
+}
+
+.section--sea h2,
+.section--sea h3 {
+  color: var(--bone);
+}
+
+.section--sea a {
+  color: var(--bone);
+}
+
+/* --- The eyebrow: small caps label above a heading --- */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 var(--s1);
+}
+
+.section--sea .eyebrow {
+  color: var(--blush);
+}
+
+/* --- Lead paragraph --- */
+.lead {
+  font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* --- Buttons: 48px minimum target --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: #000;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn--ghost:hover {
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.section--sea .btn--ghost {
+  color: var(--bone);
+  border-color: var(--bone);
+}
+
+.section--sea .btn--ghost:hover {
+  background: var(--bone);
+  color: var(--sea);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  margin-top: var(--s3);
+}
+
+/* --- Cards --- */
+.grid {
+  display: grid;
+  gap: var(--s3);
+}
+
+@media (min-width: 46rem) {
+  .grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius);
+  padding: var(--s3);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- The pledge block: where the overflow clause lives --- */
+.pledge {
+  background: var(--blush);
+  border-left: 4px solid var(--blush);
+  padding: var(--s3);
+  margin-block: var(--s3);
+}
+
+.pledge p {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* --- Proof strip --- */
+.proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s4);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-block: 1px solid var(--sand);
+  padding-block: var(--s3);
+}
+
+.proof li {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+.proof strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* --- Testimonials --- */
+.quote {
+  margin: 0;
+  padding: 0;
+}
+
+.quote p {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.quote footer {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  font-style: normal;
+}
+
+/* --- FAQ --- */
+.faq {
+  border-top: 1px solid var(--sand);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--sand);
+  padding-block: var(--s3);
+}
+
+.faq__item h3 {
+  margin: 0 0 var(--s1);
+  font-size: 1.125rem;
+}
+
+.faq__item p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Image frames --- */
+.frame {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.frame img {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* --- Breadcrumbs --- */
+.crumbs {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  padding-block: var(--s2);
+}
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.crumbs li::after {
+  content: "/";
+  margin-left: 0.4rem;
+  color: var(--sand);
+}
+
+.crumbs li:last-child::after {
+  content: "";
+}
+
+/* --- Accessibility --- */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--bone);
+  padding: var(--s2);
+  z-index: 100;
+}
+
+.skip:focus {
+  left: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

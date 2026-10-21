@@ -1,0 +1,209 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/Faq.astro";
+import portrait from "../assets/sherri-drum.webp";
+import { site, overflowClause } from "../data/site";
+
+const title = "Book a Woman Chauffeur, Not a Maybe | She Drives";
+const description =
+  "Every She Drives chauffeur is a woman, booked by name in advance. How we handle overflow, what we will not do, and who books us. Seal Beach, California TCP 46691-A.";
+
+const crumbs = [
+  { href: "/women-led-chauffeur-service/", label: "Women-led chauffeur service" },
+];
+
+const faq = [
+  {
+    q: "Can I request Sherri specifically?",
+    a: "Yes. Most trips are Sherri. If you want her specifically on a particular date, say so when you reserve and we will tell you straight away whether she is free.",
+  },
+  {
+    q: "Do you charge more for a woman chauffeur?",
+    a: "No. Nearly half of women say they refuse to pay extra for a woman driver because safety should not be a paid upgrade, and we agree. It is not a surcharge, it is who we are.",
+  },
+  {
+    q: "What happens if you are already booked on my date?",
+    a: "We tell you before anything is booked. If we cannot cover it with our own chauffeur we will offer a vetted partner operator, whose driver may not be a woman, and you decide whether that works for you.",
+  },
+  {
+    q: "Can my company set up an account?",
+    a: "Yes. Assistants booking on behalf of someone else is a normal part of the work. Tell us how you need to be invoiced and we will set it up.",
+  },
+  {
+    q: "Is She Drives a rideshare service?",
+    a: "No. There is no app and no on-demand matching. You reserve in advance, you know who is driving, and the arrangement does not change at the last minute.",
+  },
+];
+
+const who = [
+  {
+    h: "Women traveling alone",
+    p: "An early flight out of LAX or a late one back. The part of the trip you should not have to think about.",
+  },
+  {
+    h: "Parents arranging a ride",
+    p: "For a daughter heading to the airport, or for a parent who should not be driving at night.",
+  },
+  {
+    h: "Companies booking travel",
+    p: "For staff traveling alone, late, or into an unfamiliar city. A visible commitment rather than a policy line.",
+  },
+  {
+    h: "Anyone who wants the same driver",
+    p: "Weekly meetings, standing appointments, a recurring airport run. The arrangement that gets easier every time.",
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/women-led-chauffeur-service/"
+  crumbs={crumbs}
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="measure">
+        <p class="eyebrow">Women-led chauffeur service</p>
+        <h1>Book a Woman Chauffeur by Name</h1>
+        <p class="lead">
+          Yes, you can book a woman chauffeur, and with She Drives you do not
+          have to ask. Every chauffeur who drives for us is a woman, and you
+          know which one is coming before the day arrives.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The clause sits high on the page, not in the fine print. -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="measure">
+        <h2 class="h2--flush">Our promise, including the part most companies leave out</h2>
+      </div>
+      <div class="pledge measure">
+        <p>{overflowClause}</p>
+      </div>
+      <p class="measure">
+        We would rather tell you that up front than have you find out at the
+        curb. A reservation only works if the thing you booked is the thing
+        that shows up.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="measure">
+        <h2>A preference is not a promise</h2>
+        <p>
+          Both major rideshare platforms now let women ask to be matched with a
+          woman driver. It is a genuine improvement and worth using. It is also,
+          by the platforms' own description, a preference that increases your
+          chances rather than a guarantee, and on a busy night you may be
+          matched with someone else.
+        </p>
+        <p>
+          That gap is the whole reason She Drives exists. A reservation is not a
+          preference. You pick the date, we confirm who is driving, and that is
+          who arrives.
+        </p>
+        <p>
+          The demand is not imagined either. In a 2026 survey of a thousand
+          American women who use rideshare, close to six in ten said they had
+          felt unsafe in one at least once, and roughly seven in ten said they
+          use a fake phone call when riding alone at night.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sea">
+    <div class="wrap">
+      <h2>Who books us</h2>
+      <div class="grid grid--4">
+        {
+          who.map((w) => (
+            <div>
+              <h3>{w.h}</h3>
+              <p>{w.p}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="hero__inner">
+        <div class="measure">
+          <p class="eyebrow">Who is driving</p>
+          <h2>Sherri drives most trips herself</h2>
+          <p>
+            She Drives is small on purpose. Sherri founded the company after a
+            traumatic brain injury forced her to rebuild her health and her
+            working life, and she built it around the thing she wanted most as a
+            passenger: to feel safe, and not to have to think twice about it.
+          </p>
+          <p>
+            The goal is to grow the bench of women chauffeurs this industry does
+            not have, training them to the same standard. That part is still
+            being built, and we would rather say so than imply a roster that is
+            not there yet.
+          </p>
+          <p>
+            <a href="/about/">More about Sherri</a>
+          </p>
+        </div>
+        <div class="frame portrait">
+          <Image
+            src={portrait}
+            alt="Sherri Drum, founder of She Drives"
+            widths={[420, 720]}
+            sizes="(min-width: 52rem) 24rem, 92vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} heading="Questions women ask before booking" />
+
+  <section class="section section--tight">
+    <div class="wrap measure">
+      <h2>Reserve with us</h2>
+      <p class="lead">
+        Tell us the date and where you are going. We confirm who is driving
+        before anything is booked.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/book/">Start a reservation</a>
+        <a class="btn btn--ghost" href={site.smsHref}>Text {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .h2--flush {
+    margin-top: 0;
+  }
+  .hero__inner {
+    display: grid;
+    gap: var(--s4);
+    align-items: center;
+  }
+  @media (min-width: 52rem) {
+    .hero__inner {
+      grid-template-columns: 1.1fr 1fr;
+      gap: var(--s5);
+    }
+  }
+  .portrait {
+    aspect-ratio: 4 / 5;
+    max-width: 24rem;
+  }
+</style>

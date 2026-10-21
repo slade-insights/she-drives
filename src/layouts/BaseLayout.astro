@@ -1,0 +1,290 @@
+---
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+import { Image } from "astro:assets";
+import { site, nav } from "../data/site";
+import BusinessSchema from "../components/BusinessSchema.astro";
+import logo from "../assets/she-drives-logo.webp";
+
+interface Crumb {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  crumbs?: Crumb[];
+}
+
+const { title, description, path, crumbs } = Astro.props;
+const canonical = `${site.siteUrl}${path}`;
+
+const crumbSchema = crumbs
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { href: "/", label: "Home" },
+        ...crumbs,
+      ].map((c, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: c.label,
+        item: `${site.siteUrl}${c.href}`,
+      })),
+    }
+  : null;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <BusinessSchema />
+    {
+      crumbSchema && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(crumbSchema)}
+        />
+      )
+    }
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a href="/" class="site-header__brand">
+          <Image
+            src={logo}
+            alt="She Drives"
+            widths={[220, 440]}
+            sizes="180px"
+            loading="eager"
+            class="site-header__logo"
+          />
+          <span class="site-header__sub">Seal Beach, California</span>
+        </a>
+        <nav aria-label="Main">
+          <ul class="site-header__nav">
+            {
+              nav.map((item) => (
+                <li>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <a class="site-header__phone" href={site.phoneHref}>{site.phone}</a>
+      </div>
+    </header>
+
+    {
+      crumbs && (
+        <nav class="crumbs wrap" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            {crumbs.map((c, i) => (
+              <li>
+                {i === crumbs.length - 1 ? (
+                  <span aria-current="page">{c.label}</span>
+                ) : (
+                  <a href={c.href}>{c.label}</a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )
+    }
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="grid grid--3">
+          <div>
+            <p class="site-footer__name">{site.legalName}</p>
+            <p>
+              {site.address.locality}, {site.address.region}<br />
+              {site.tcpLong}
+            </p>
+          </div>
+          <div>
+            <p>
+              <a href={site.phoneHref}>{site.phone}</a><br />
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </p>
+            <p>
+              <a href={site.instagram} rel="me">Instagram</a>
+            </p>
+          </div>
+          <div>
+            <ul class="site-footer__nav">
+              {
+                nav.map((item) => (
+                  <li>
+                    <a href={item.href}>{item.label}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Sticky mobile action bar. CSS-only, no JavaScript. -->
+    <div class="actionbar" role="group" aria-label="Contact She Drives">
+      <a class="actionbar__btn" href={site.phoneHref}>Call</a>
+      <a class="actionbar__btn" href={site.smsHref}>Text</a>
+      <a class="actionbar__btn actionbar__btn--primary" href="/book/">Reserve</a>
+    </div>
+
+    <style>
+      .site-header {
+        background: var(--bone);
+        border-bottom: 1px solid var(--sand);
+      }
+      .site-header__inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--s2) var(--s3);
+        padding-block: var(--s2);
+      }
+      .site-header__brand {
+        text-decoration: none;
+        margin-right: auto;
+      }
+      .site-header__logo {
+        display: block;
+        width: 180px;
+        height: auto;
+        /* The logo art carries generous internal padding, so a negative
+           margin pulls the lockup optically flush with the nav baseline. */
+        margin: -0.6rem 0 -0.9rem -0.4rem;
+      }
+      .site-header__sub {
+        display: block;
+        font-size: 0.6875rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        padding-left: 0.2rem;
+      }
+      .site-header__nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--s3);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.9375rem;
+      }
+      .site-header__nav a {
+        text-decoration: none;
+        display: inline-block;
+        padding-block: 0.6rem;
+      }
+      .site-header__nav a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .site-header__phone {
+        font-weight: 600;
+        text-decoration: none;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+      }
+      @media (max-width: 52rem) {
+        .site-header__phone {
+          display: none;
+        }
+      }
+
+      .site-footer {
+        background: var(--ink);
+        color: var(--sand);
+        padding-block: var(--s4);
+        margin-top: var(--s5);
+        font-size: 0.9375rem;
+      }
+      .site-footer a {
+        color: var(--bone);
+      }
+      .site-footer__name {
+        font-family: var(--font-display);
+        font-size: 1.125rem;
+        color: var(--bone);
+        margin-bottom: var(--s1);
+      }
+      .site-footer__nav {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .actionbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        gap: 1px;
+        background: var(--sand);
+        border-top: 1px solid var(--sand);
+        z-index: 50;
+      }
+      .actionbar__btn {
+        flex: 1;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bone);
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+      }
+      .actionbar__btn--primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      @media (min-width: 52rem) {
+        .actionbar {
+          display: none;
+        }
+      }
+      @media (max-width: 52rem) {
+        body {
+          padding-bottom: 54px;
+        }
+      }
+    </style>
+  </body>
+</html>

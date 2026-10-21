@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const title = "About Sherri | The Woman Behind She Drives";
+const description =
+  "She Drives is a women-led chauffeur service in Seal Beach, California, founded by Sherri Drum. How it started and the standard it is built on.";
+const crumbs = [{ href: "/about/", label: "About" }];
+---
+
+<BaseLayout title={title} description={description} path="/about/" crumbs={crumbs}>
+  <section class="section">
+    <div class="wrap">
+      <div class="measure">
+        <p class="eyebrow">About</p>
+        <h1>The Woman Behind She Drives</h1>
+        <p class="lead">
+          Sherri Drum founded She Drives in Seal Beach and drives most trips
+          herself. The company exists because of what she wanted as a passenger.
+        </p>
+        <p>
+          After a traumatic brain injury forced her to rebuild both her health
+          and her working life, she started again with one idea: that getting
+          into a car should not be the part of the day you have to brace for.
+          That applies to everyone, and for women traveling alone it carries
+          more weight.
+        </p>
+        <p>
+          She Drives is deliberately small. Sherri is usually the person who
+          arrives, which is the whole point. The ambition is to build the bench
+          of women chauffeurs this industry does not have, trained to the same
+          standard, and that part is still being built.
+        </p>
+        <p>
+          She Drives LLC operates under California {site.tcp}.
+        </p>
+        <p>
+          <a href="/women-led-chauffeur-service/">How we work and who we drive</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

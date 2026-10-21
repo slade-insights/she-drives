@@ -1,0 +1,278 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/Faq.astro";
+import { site, overflowClause } from "../data/site";
+
+const title = "LAX Car Service | Women-Led, Flight-Tracked";
+const description =
+  "Private LAX car service from Seal Beach, Long Beach and Orange County. Flight-tracked pickups, a woman chauffeur booked by name. California TCP 46691-A.";
+
+const crumbs = [{ href: "/lax-car-service/", label: "LAX car service" }];
+
+/**
+ * Service schema. provider references the sitewide @id.
+ * No priceSpecification until real rates are confirmed.
+ */
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "LAX airport car service",
+  serviceType: "Airport transfer",
+  provider: { "@id": `${site.siteUrl}/#business` },
+  areaServed: [
+    "Seal Beach",
+    "Los Alamitos",
+    "Rossmoor",
+    "Long Beach",
+    "Huntington Beach",
+    "Newport Beach",
+    "Irvine",
+  ].map((a) => ({ "@type": "Place", name: a })),
+  url: `${site.siteUrl}/lax-car-service/`,
+};
+
+/**
+ * Drive times are typical ranges for the 405 corridor, deliberately wide
+ * rather than precise. They describe traffic, not a guarantee.
+ * TODO(verify): have Sherri sanity-check these against her own run times.
+ */
+const driveTimes = [
+  { from: "Seal Beach", off: "35 to 45 min", peak: "60 to 90 min" },
+  { from: "Long Beach", off: "30 to 40 min", peak: "55 to 85 min" },
+  { from: "Huntington Beach", off: "40 to 50 min", peak: "70 to 95 min" },
+  { from: "Newport Beach", off: "45 to 55 min", peak: "75 to 105 min" },
+  { from: "Irvine", off: "50 to 60 min", peak: "80 to 110 min" },
+];
+
+const faq = [
+  {
+    q: "How early should the pickup be for an LAX flight?",
+    a: "From Seal Beach we normally suggest leaving three hours before a domestic departure and three and a half before an international one. That is driven by the 405 rather than by the airport, and we will give you a time for your specific flight when you book.",
+  },
+  {
+    q: "What happens if my flight is delayed?",
+    a: "We track the flight, so a delay changes our arrival time, not your plan. You do not need to call us from the plane and you are not charged for sitting in the air.",
+  },
+  {
+    q: "Where will my chauffeur meet me at LAX?",
+    a: "We confirm the exact meeting point with you before the day, because it depends on your terminal and whether you want a curbside pickup or to be met inside with your bags. You will have the plan and the phone number in writing before you fly.",
+  },
+  {
+    q: "Can you pick up from a private terminal or FBO?",
+    a: "Yes. Private aviation terminals work differently from the main terminals and we will coordinate directly with the FBO on the arrangements.",
+  },
+  {
+    q: "Is this cheaper than a rideshare to LAX?",
+    a: "No, and it is not trying to be. A rideshare is cheaper. This is a reserved chauffeur who tracks your flight, meets you by name, handles the bags, and is the same person every time you book.",
+  },
+  {
+    q: "Do you do the return trip from LAX too?",
+    a: "Yes, and most clients book both at once. Arrivals are the half people most often regret improvising, especially on a late landing.",
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/lax-car-service/"
+  crumbs={crumbs}
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="measure">
+        <p class="eyebrow">Airport transfers</p>
+        <h1>LAX Car Service to and from Orange County</h1>
+        <p class="lead">
+          A reserved woman chauffeur who tracks your flight, meets you by name,
+          and drives the 405 so you do not have to think about it.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/book/">Reserve an LAX transfer</a>
+          <a class="btn btn--ghost" href={site.phoneHref}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="measure">
+        <h2 class="flush">The part that actually goes wrong is the arrival</h2>
+        <p>
+          Departures are easy to plan. Arrivals are where people improvise, and
+          LAX is a bad airport to improvise at: you land late, the terminal is
+          a long walk, and app pickups route you out to the LAX-it lot with a
+          queue and a shuttle at the end of it.
+        </p>
+        <p>
+          A reserved chauffeur removes that entire sequence. We know your flight
+          number, we watch it, and we have agreed the meeting point with you in
+          writing before you left.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Band 3: Localization. Real roads, real times, honest ranges. -->
+  <section class="section">
+    <div class="wrap">
+      <h2>Drive times to LAX, honestly</h2>
+      <p class="measure">
+        Everyone publishes the mileage. The useful number is how long the 405
+        takes at the hour you are actually traveling, so here are typical
+        ranges rather than a best case.
+      </p>
+      <div class="table-scroll">
+        <table>
+          <caption class="visually-hidden">
+            Typical drive times to LAX by origin city and time of day
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">From</th>
+              <th scope="col">Off-peak</th>
+              <th scope="col">Weekday peak</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              driveTimes.map((d) => (
+                <tr>
+                  <th scope="row">{d.from}</th>
+                  <td>{d.off}</td>
+                  <td>{d.peak}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="measure note">
+        Peak here means roughly 6am to 9am and 3pm to 7pm on a weekday. Friday
+        afternoons run worse than the ranges above, and we plan for that rather
+        than hoping.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--sea">
+    <div class="wrap">
+      <div class="grid grid--3">
+        <div>
+          <h3>Flight tracking</h3>
+          <p>
+            We watch your flight from the moment it pushes back. Early landings
+            and delays both change our schedule, not yours.
+          </p>
+        </div>
+        <div>
+          <h3>Meeting point agreed in writing</h3>
+          <p>
+            Curbside or met inside with your bags, confirmed before you fly,
+            with a direct number that reaches your chauffeur.
+          </p>
+        </div>
+        <div>
+          <h3>Private terminals and FBOs</h3>
+          <p>
+            Private aviation works on its own rules. We coordinate with the FBO
+            directly rather than putting that on you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="measure">
+        <h2>Who is driving</h2>
+        <p>
+          The same reason people book us for everything else applies double on a
+          late arrival. You are tired, it is dark, and you are getting into a
+          car at an airport you did not choose.
+        </p>
+      </div>
+      <div class="pledge measure">
+        <p>{overflowClause}</p>
+      </div>
+      <p class="measure">
+        <a href="/women-led-chauffeur-service/">How we work and who we drive</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap measure">
+      <h2>Other airports we cover</h2>
+      <p>
+        Long Beach Airport is about seven miles from our base and is the easiest
+        airport in the region to fly out of. We also run regularly to John Wayne,
+        Burbank, Ontario, Van Nuys and Hawthorne, plus the Long Beach and San
+        Pedro cruise terminals.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} heading="LAX questions we get asked" />
+
+  <section class="section section--sea">
+    <div class="wrap measure">
+      <h2>Reserve your LAX transfer</h2>
+      <p class="lead">
+        Send us the flight number and the pickup address. We confirm
+        availability, the meeting point and a quote.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/book/">Start a reservation</a>
+        <a class="btn btn--ghost" href={site.phoneHref}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(serviceSchema)}
+  />
+</BaseLayout>
+
+<style>
+  .flush {
+    margin-top: 0;
+  }
+  .table-scroll {
+    overflow-x: auto;
+    margin-top: var(--s3);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 46rem;
+    background: var(--surface);
+    font-size: 0.9375rem;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--sand);
+  }
+  thead th {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  tbody th {
+    font-weight: 600;
+  }
+  .note {
+    margin-top: var(--s2);
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+</style>

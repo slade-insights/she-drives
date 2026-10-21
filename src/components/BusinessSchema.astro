@@ -1,0 +1,44 @@
+---
+/**
+ * Sitewide LimousineService block. Emitted once per page.
+ * The @id is stable and every other block references it.
+ *
+ * Deliberately absent until confirmed:
+ *  - openingHoursSpecification (real hours unknown)
+ *  - priceRange / priceSpecification (real pricing unknown)
+ *  - aggregateRating (no Google profile exists yet)
+ *  - streetAddress (only the locality is published today)
+ * Adding any of these without confirmation would be an invented claim.
+ */
+import { site } from "../data/site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LimousineService",
+  "@id": `${site.siteUrl}/#business`,
+  name: site.name,
+  legalName: site.legalName,
+  url: `${site.siteUrl}/`,
+  telephone: site.phone,
+  email: site.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.address.locality,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
+  areaServed: site.serviceAreas.map((a) => ({ "@type": "Place", name: a })),
+  sameAs: [site.instagram],
+  identifier: {
+    "@type": "PropertyValue",
+    name: "California Public Utilities Commission TCP",
+    value: site.tcp,
+  },
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(schema)}
+/>

@@ -1,0 +1,181 @@
+---
+/**
+ * Reservation form. Native HTML POST, no JavaScript, so it works with
+ * scripts disabled and cannot break the build.
+ *
+ * TODO(endpoint): set FORM_ENDPOINT to the live form handler before launch.
+ * Free options that suit a static build: Web3Forms or Formspree. Until it is
+ * set the form renders but posts nowhere, which is correct for staging.
+ *
+ * The hidden `source` field records which page the reservation came from,
+ * which is how we attribute bookings without a tracking script.
+ */
+import { site } from "../data/site";
+
+interface Props {
+  source: string;
+  service?: string;
+}
+
+const { source, service = "" } = Astro.props;
+
+const FORM_ENDPOINT = ""; // see TODO above
+
+const serviceOptions = [
+  "Airport transfer",
+  "Executive or corporate travel",
+  "Hourly / as directed",
+  "Wedding or event",
+  "Cruise port transfer",
+  "Private tour or experience",
+  "Something else",
+];
+---
+
+<form
+  class="booking"
+  method="post"
+  action={FORM_ENDPOINT || undefined}
+  aria-labelledby="booking-heading"
+>
+  <input type="hidden" name="source" value={source} />
+
+  <div class="booking__row">
+    <label for="service">What do you need?</label>
+    <select id="service" name="service" required>
+      <option value="">Choose one</option>
+      {
+        serviceOptions.map((o) => (
+          <option value={o} selected={o === service}>
+            {o}
+          </option>
+        ))
+      }
+    </select>
+  </div>
+
+  <div class="booking__grid">
+    <div class="booking__row">
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required />
+    </div>
+    <div class="booking__row">
+      <label for="time">Pickup time</label>
+      <input type="time" id="time" name="time" required />
+    </div>
+  </div>
+
+  <div class="booking__row">
+    <label for="pickup">Pickup address</label>
+    <input type="text" id="pickup" name="pickup" autocomplete="street-address" required />
+  </div>
+
+  <div class="booking__row">
+    <label for="dropoff">Where are you headed?</label>
+    <input type="text" id="dropoff" name="dropoff" required />
+  </div>
+
+  <div class="booking__grid">
+    <div class="booking__row">
+      <label for="passengers">Passengers</label>
+      <input type="number" id="passengers" name="passengers" min="1" max="60" required />
+    </div>
+    <div class="booking__row">
+      <label for="bags">Bags</label>
+      <input type="number" id="bags" name="bags" min="0" max="60" />
+    </div>
+  </div>
+
+  <div class="booking__grid">
+    <div class="booking__row">
+      <label for="name">Your name</label>
+      <input type="text" id="name" name="name" autocomplete="name" required />
+    </div>
+    <div class="booking__row">
+      <label for="mobile">Mobile</label>
+      <input type="tel" id="mobile" name="mobile" autocomplete="tel" required />
+    </div>
+  </div>
+
+  <div class="booking__row">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" autocomplete="email" required />
+  </div>
+
+  <div class="booking__row">
+    <label for="notes">Anything we should know?</label>
+    <textarea id="notes" name="notes" rows="4"></textarea>
+    <p class="booking__hint">
+      Flight number, a tight connection, car seats, a dog, a passenger who needs
+      a hand with the door. The details are the job.
+    </p>
+  </div>
+
+  <button class="btn btn--primary" type="submit">Request this reservation</button>
+
+  <p class="booking__hint">
+    Prefer to talk it through? Call or text
+    <a href={site.phoneHref}>{site.phone}</a>.
+  </p>
+</form>
+
+<style>
+  .booking {
+    background: var(--surface);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius);
+    padding: var(--s3);
+    max-width: 38rem;
+  }
+  .booking__row {
+    margin-bottom: var(--s3);
+  }
+  .booking__grid {
+    display: grid;
+    gap: var(--s2);
+  }
+  @media (min-width: 34rem) {
+    .booking__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s3);
+    }
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    margin-bottom: 0.4rem;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.65rem 0.75rem;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--bone);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius);
+  }
+  textarea {
+    min-height: 7rem;
+    resize: vertical;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-color: var(--focus);
+  }
+  .booking__hint {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+    margin: 0.5rem 0 0;
+  }
+  button[type="submit"] {
+    width: 100%;
+  }
+</style>
