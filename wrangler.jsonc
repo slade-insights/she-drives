@@ -1,0 +1,18 @@
+{
+  // Cloudflare Workers static assets config.
+  //
+  // The dashboard project "she-drives" is a Worker, not a Pages project, so
+  // the built site is served through Workers Static Assets. There is no
+  // server-side code: `assets` alone serves the Astro output directly.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "she-drives",
+  "compatibility_date": "2026-10-21",
+  "assets": {
+    "directory": "./dist",
+    // Serves /lax-car-service/ from dist/lax-car-service/index.html, which is
+    // what the artifact preview could not do and why links 404'd there.
+    "html_handling": "auto-trailing-slash",
+    // Serves the styled 404 page instead of a bare Cloudflare error.
+    "not_found_handling": "404-page"
+  }
+}
