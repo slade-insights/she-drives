@@ -1,0 +1,6 @@
+# Squarespace paths that have an unambiguous destination today.
+# The rest (/services, /curated-tours-experiences, /testimonials) stay out
+# until their replacement pages exist, because redirecting them to the
+# homepage would be a soft 404 and lose whatever equity they hold.
+/contact/   /book/   301
+/contact    /book/   301

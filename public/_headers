@@ -1,0 +1,16 @@
+# Security headers for every response.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# STAGING ONLY. The workers.dev URL is publicly crawlable, and an indexed
+# copy of this site would compete with shedrivessocal.com as duplicate
+# content. Canonicals already point at the real domain, but this makes it
+# certain. DELETE THIS BLOCK when the custom domain goes live.
+  X-Robots-Tag: noindex, nofollow
+
+# Hashed asset filenames change on every build, so they can be cached hard.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
