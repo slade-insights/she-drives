@@ -5,7 +5,7 @@ import "../styles/global.css";
 import { Image } from "astro:assets";
 import { site, nav } from "../data/site";
 import BusinessSchema from "../components/BusinessSchema.astro";
-import logo from "../assets/she-drives-logo.webp";
+import logo from "../assets/she-drives-lockup.webp";
 
 interface Crumb {
   href: string;
@@ -53,6 +53,15 @@ const crumbSchema = crumbs
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content={`${site.siteUrl}/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="She Drives" />
+    <meta name="twitter:image" content={`${site.siteUrl}/og-image.jpg`} />
+    <meta name="theme-color" content="#fadedf" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <BusinessSchema />
     {
       crumbSchema && (
@@ -178,11 +187,8 @@ const crumbSchema = crumbs
       }
       .site-header__logo {
         display: block;
-        width: 210px;
+        width: 168px;
         height: auto;
-        /* The logo art carries generous internal padding, so negative
-           margins pull the lockup optically flush with the nav. */
-        margin: -1.1rem 0 -1.3rem -0.6rem;
       }
       .site-header__nav {
         display: flex;
