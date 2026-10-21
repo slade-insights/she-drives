@@ -11,10 +11,15 @@ interface Item {
 
 interface Props {
   heading?: string;
+  label?: string;
   items: Item[];
 }
 
-const { heading = "Questions people ask", items } = Astro.props;
+const {
+  heading = "Questions people ask",
+  label = "Questions",
+  items,
+} = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
@@ -27,18 +32,21 @@ const schema = {
 };
 ---
 
-<section class="section section--tight">
-  <div class="wrap">
-    <h2>{heading}</h2>
-    <div class="faq">
-      {
-        items.map((item) => (
-          <div class="faq__item">
-            <h3>{item.q}</h3>
-            <p class="measure">{item.a}</p>
-          </div>
-        ))
-      }
+<section class="section">
+  <div class="wrap rail">
+    <p class="rail__label">{label}</p>
+    <div>
+      <h2 class="visually-hidden">{heading}</h2>
+      <div class="faq">
+        {
+          items.map((item) => (
+            <div class="faq__item">
+              <h3>{item.q}</h3>
+              <p class="measure">{item.a}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

@@ -78,12 +78,12 @@ const faq = [
   path="/lax-car-service/"
   crumbs={crumbs}
 >
-  <section class="section">
-    <div class="wrap">
-      <div class="measure">
-        <p class="eyebrow">Airport transfers</p>
-        <h1>LAX Car Service to and from Orange County</h1>
-        <p class="lead">
+  <section class="section section--tight">
+    <div class="wrap rail">
+      <p class="rail__label">Airport transfers</p>
+      <div>
+        <h1 class="measure">LAX Car Service to and from Orange County</h1>
+        <p class="lead measure">
           A reserved woman chauffeur who tracks your flight, meets you by name,
           and drives the 405 so you do not have to think about it.
         </p>
@@ -95,17 +95,18 @@ const faq = [
     </div>
   </section>
 
-  <section class="section section--tight">
-    <div class="wrap">
-      <div class="measure">
-        <h2 class="flush">The part that actually goes wrong is the arrival</h2>
-        <p>
+  <section class="section">
+    <div class="wrap rail">
+      <p class="rail__label">Why reserve</p>
+      <div>
+        <h2 class="measure">The part that actually goes wrong is the arrival</h2>
+        <p class="measure">
           Departures are easy to plan. Arrivals are where people improvise, and
           LAX is a bad airport to improvise at: you land late, the terminal is
           a long walk, and app pickups route you out to the LAX-it lot with a
           queue and a shuttle at the end of it.
         </p>
-        <p>
+        <p class="measure">
           A reserved chauffeur removes that entire sequence. We know your flight
           number, we watch it, and we have agreed the meeting point with you in
           writing before you left.
@@ -115,9 +116,11 @@ const faq = [
   </section>
 
   <!-- Band 3: Localization. Real roads, real times, honest ranges. -->
-  <section class="section">
-    <div class="wrap">
-      <h2>Drive times to LAX, honestly</h2>
+  <section class="section section--blush">
+    <div class="wrap rail">
+      <p class="rail__label">Drive times</p>
+      <div>
+      <h2 class="measure">Drive times to LAX, honestly</h2>
       <p class="measure">
         Everyone publishes the mileage. The useful number is how long the 405
         takes at the hour you are actually traveling, so here are typical
@@ -156,24 +159,25 @@ const faq = [
     </div>
   </section>
 
-  <section class="section section--sea">
-    <div class="wrap">
+  <section class="section">
+    <div class="wrap rail">
+      <p class="rail__label">How it runs</p>
       <div class="grid grid--3">
-        <div>
+        <div class="card">
           <h3>Flight tracking</h3>
           <p>
             We watch your flight from the moment it pushes back. Early landings
             and delays both change our schedule, not yours.
           </p>
         </div>
-        <div>
+        <div class="card">
           <h3>Meeting point agreed in writing</h3>
           <p>
             Curbside or met inside with your bags, confirmed before you fly,
             with a direct number that reaches your chauffeur.
           </p>
         </div>
-        <div>
+        <div class="card">
           <h3>Private terminals and FBOs</h3>
           <p>
             Private aviation works on its own rules. We coordinate with the FBO
@@ -185,28 +189,31 @@ const faq = [
   </section>
 
   <section class="section">
-    <div class="wrap">
-      <div class="measure">
-        <h2>Who is driving</h2>
-        <p>
+    <div class="wrap rail">
+      <p class="rail__label">Who is driving</p>
+      <div>
+        <h2 class="measure">The reason it matters most on a late arrival</h2>
+        <p class="measure">
           The same reason people book us for everything else applies double on a
           late arrival. You are tired, it is dark, and you are getting into a
           car at an airport you did not choose.
         </p>
       </div>
-      <div class="pledge measure">
-        <p>{overflowClause}</p>
-      </div>
-      <p class="measure">
-        <a href="/women-led-chauffeur-service/">How we work and who we drive</a>
-      </p>
+        <div class="pledge">
+          <p>{overflowClause}</p>
+        </div>
+        <p>
+          <a href="/women-led-chauffeur-service/">How we work and who we drive</a>
+        </p>
     </div>
   </section>
 
-  <section class="section section--tight">
-    <div class="wrap measure">
-      <h2>Other airports we cover</h2>
-      <p>
+  <section class="section">
+    <div class="wrap rail">
+      <p class="rail__label">Other airports</p>
+      <div>
+      <h2 class="measure">Other airports we cover</h2>
+      <p class="measure">
         Long Beach Airport is about seven miles from our base and is the easiest
         airport in the region to fly out of. We also run regularly to John Wayne,
         Burbank, Ontario, Van Nuys and Hawthorne, plus the Long Beach and San
@@ -215,18 +222,21 @@ const faq = [
     </div>
   </section>
 
-  <Faq items={faq} heading="LAX questions we get asked" />
+  <Faq items={faq} label="LAX questions we get asked" />
 
-  <section class="section section--sea">
-    <div class="wrap measure">
-      <h2>Reserve your LAX transfer</h2>
-      <p class="lead">
+  <section class="section section--ink">
+    <div class="wrap rail">
+      <p class="rail__label">Reserve</p>
+      <div>
+      <h2 class="measure">Reserve your LAX transfer</h2>
+      <p class="lead measure">
         Send us the flight number and the pickup address. We confirm
         availability, the meeting point and a quote.
       </p>
       <div class="btn-row">
         <a class="btn btn--primary" href="/book/">Start a reservation</a>
         <a class="btn btn--ghost" href={site.phoneHref}>Call {site.phone}</a>
+      </div>
       </div>
     </div>
   </section>
@@ -239,9 +249,6 @@ const faq = [
 </BaseLayout>
 
 <style>
-  .flush {
-    margin-top: 0;
-  }
   .table-scroll {
     overflow-x: auto;
     margin-top: var(--s3);
@@ -252,20 +259,19 @@ const faq = [
     max-width: 46rem;
     background: var(--surface);
     font-size: 0.9375rem;
+    border-radius: var(--radius);
   }
   th,
   td {
     text-align: left;
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--sand);
+    border-bottom: 1px solid var(--rule);
   }
   thead th {
     font-family: var(--font-body);
-    font-size: 0.8125rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: 0.875rem;
     color: var(--ink-soft);
-    font-weight: 600;
+    font-weight: 500;
   }
   tbody th {
     font-weight: 600;
