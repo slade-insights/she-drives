@@ -243,6 +243,16 @@ p > a:only-child {
   padding-block: 0.35rem;
 }
 
+/* Card titles are links too, and at 19px/1.1 they measure under 24px. */
+.card h3 {
+  margin-bottom: calc(var(--s1) - 0.15rem);
+}
+
+.card h3 > a:only-child {
+  display: inline-block;
+  padding-block: 0.15rem;
+}
+
 .lead {
   font-size: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);
   line-height: 1.5;
