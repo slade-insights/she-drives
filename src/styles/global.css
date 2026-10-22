@@ -245,12 +245,13 @@ p > a:only-child {
 
 /* Card titles are links too, and at 19px/1.1 they measure under 24px. */
 .card h3 {
-  margin-bottom: calc(var(--s1) - 0.15rem);
+  margin-bottom: calc(var(--s1) - 0.25rem);
 }
 
 .card h3 > a:only-child {
   display: inline-block;
-  padding-block: 0.15rem;
+  /* 0.15rem landed at 23.95px, fractionally under the 24px minimum. */
+  padding-block: 0.25rem;
 }
 
 .lead {
