@@ -68,7 +68,9 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-variation-settings: "SOFT" 0, "WONK" 1;
+  /* WONK 0 keeps Fraunces's upright alternates. WONK 1 turns on the curled
+     swash f and g, which read as decorative rather than considered. */
+  font-variation-settings: "SOFT" 0, "WONK" 0;
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -220,6 +222,15 @@ img {
     margin-top: var(--s2);
     background: var(--blush-deep);
   }
+}
+
+/*
+ * Any rail column holding measured prose constrains every text child, so a
+ * paragraph added later cannot escape the measure by forgetting the class.
+ * Grids and figures are excluded: they are meant to use the full column.
+ */
+.rail > div:has(> .measure) > :is(p, h1, h2, h3, ul, ol, blockquote) {
+  max-width: var(--measure);
 }
 
 .lead {
