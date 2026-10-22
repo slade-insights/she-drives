@@ -233,6 +233,16 @@ img {
   max-width: var(--measure);
 }
 
+/*
+ * A link that is the only thing in its paragraph is a navigation target
+ * rather than inline prose, so it needs a real tap target. Links inside a
+ * sentence keep the inline exception and are left alone.
+ */
+p > a:only-child {
+  display: inline-block;
+  padding-block: 0.35rem;
+}
+
 .lead {
   font-size: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);
   line-height: 1.5;
@@ -421,6 +431,27 @@ img {
 
 /* ---------- Testimonials ---------- */
 
+/*
+ * The quote band breaks out of the rail. Inside it, three columns left each
+ * quote about 211px wide, which is roughly 25 characters a line. Full width
+ * gives them near 290px, and the label sits above rather than beside.
+ */
+.band__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--blush);
+  margin: 0 0 var(--s3);
+}
+
+.band__label::after {
+  content: "";
+  display: block;
+  width: 1.75rem;
+  height: 2px;
+  margin-top: var(--s2);
+  background: var(--rose);
+}
+
 .quote {
   margin: 0;
 }
@@ -428,8 +459,8 @@ img {
 .quote p {
   font-family: var(--font-display);
   font-variation-settings: "SOFT" 0, "WONK" 0;
-  font-size: 1.125rem;
-  line-height: 1.5;
+  font-size: 1.0625rem;
+  line-height: 1.55;
 }
 
 .quote footer {
